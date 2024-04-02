@@ -61,7 +61,5 @@ Future<void> fetchPosts() async {
             ),
     );
   }
-
-
 }
 

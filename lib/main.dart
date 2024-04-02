@@ -1,5 +1,5 @@
 import 'package:examen_1/Cubit/post_cubit.dart';
-import 'package:examen_1/Screen/post.screen.dart';
+import 'package:examen_1/Screen/post.screen.txt';
 import 'package:examen_1/bloc/post_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

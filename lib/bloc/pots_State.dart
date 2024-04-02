@@ -1,5 +1,6 @@
 
 import 'package:equatable/equatable.dart';
+import 'package:examen_1/model/post_model.dart';
 
 abstract class PostSate extends Equatable{
   const PostSate();
@@ -11,8 +12,8 @@ abstract class PostSate extends Equatable{
 class StringLoading extends PostSate {}
 
 class StringNew extends PostSate {
-  final String data;
-
+  final List<Post> data;
+  
   const StringNew({required this.data});
-
+  
 }
