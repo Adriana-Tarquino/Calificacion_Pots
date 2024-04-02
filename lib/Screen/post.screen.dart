@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import '../model/post_model.dart';
+
+
+class PostScreen extends StatefulWidget {
+  const PostScreen({super.key});
+
+  @override
+  State<PostScreen> createState() => _PostScreenState();
+}
+
+class _PostScreenState extends State<PostScreen> {
+  Dio dio = Dio();
+  List<Post> posts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPosts();
+  }
+Future<void> fetchPosts() async {
+  try {
+    Response response = await dio.get('https://jsonplaceholder.typicode.com/posts');
+    if (response.statusCode == 200) {
+      setState(() {
+        posts = (response.data as List)
+            .map((postJson) => Post.fromJson(postJson))
+            .toList();
+      });
+    } else {
+      print('Failed to load posts');
+    }
+  } catch (e) {
+    print('Error: $e');
+  }
+}
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lista de Posts'),
+      ),
+      body: posts.isNotEmpty
+          ? ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(posts[index].title),
+                  subtitle: Text(posts[index].body),
+                  
+                  );
+              },
+            )
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
+    );
+  }
+
+
+}
+
